@@ -3,20 +3,23 @@
 
 #define LED0_FLAG 0x01
 #define LED1_FLAG 0x02
-#define LED2_FLAG	0x04
-#define NO_LEDS		0x00
+#define LED2_FLAG 0x04
+#define NO_LEDS	  0x00
 
 module Challenge3C 
 {
-  uses interface Boot;
+	uses 
+	{
+		interface Boot;
   
-  uses interface Timer<TMilli> as Timer;  
-  uses interface Leds;
+  	interface Timer<TMilli> as Timer;  
+  	interface Leds;
   
-  uses interface Packet; 
-	uses interface AMSend;
-	uses interface Receive; 
-	uses interface SplitControl as AMControl;
+  	interface Packet; 
+		interface AMSend;
+		interface Receive; 
+		interface SplitControl as AMControl;
+	}
 }
 
 implementation 
@@ -25,14 +28,12 @@ implementation
 	bool locked;
 	uint16_t counter;
 	uint8_t leds_flags;
-	uint8_t recv_msg_count;
   
   // 1. At boot, start the AM Controller
   event void Boot.booted() 
   { 
 		counter = 0;
 		leds_flags = 0;
-		recv_msg_count = 0;
 		call AMControl.start(); 
 	} 
 	
@@ -59,12 +60,12 @@ implementation
 			}
 		}
 		
-		
 		if (err == SUCCESS)  
 			call Timer.startPeriodic(period_ms);
 		else
 			call AMControl.start(); 
 	} 
+	
 	event void AMControl.stopDone(error_t err) { }
 
   // ...When the timer fires, send a message in broadcast
@@ -85,16 +86,15 @@ implementation
 			}
 		}
 		
-		counter++;
   	printfflush();
   }
+
   event void AMSend.sendDone(message_t* msg, error_t error)
 	{
 		// Unlock if correctly sent
 		if (&packet == msg) 
 			locked = FALSE; 
 	}
-	
 	
 	// Receiving Inteface
 	event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len)
@@ -104,7 +104,7 @@ implementation
 			// Something is received
 			am_radio_count_msg_t* rcm = (am_radio_count_msg_t*)payload; 
 			
-			recv_msg_count++;
+			counter++;
 			if (rcm->counter % 10 == 0)
 			{
   			printf("Reset msg!\n");
@@ -144,15 +144,13 @@ implementation
 				
 			}
 			
-			if (TOS_NODE_ID == 2 && recv_msg_count <= 20) // Print Mote2 led status up to 20 times
-				printf("%d%d%d\n", (leds_flags & LED0_FLAG) > 0, (leds_flags & LED1_FLAG) > 0, (leds_flags & LED2_FLAG) > 0);
+			if (TOS_NODE_ID == 2 && counter <= 20) // Print Mote2 led status up to 20 times
+				printf("%d%d%d\n", (leds_flags & LED2_FLAG) > 0, (leds_flags & LED1_FLAG) > 0, (leds_flags & LED0_FLAG) > 0);
 				
 		} 
 		
   	printfflush();
 		return msg; 
-	} 
-
-	
+	} 	
 }
 
