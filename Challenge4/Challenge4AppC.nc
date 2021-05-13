@@ -8,7 +8,12 @@ implementation {
 /****** COMPONENTS *****/
   components MainC, Challenge4C as App;
   //add the other components here
-
+  components new AMSenderC(AM_MY_MSG);
+  components new AMReceiverC(AM_MY_MSG);
+  components new TimerMilliC() as Timer;
+  components ActiveMessageC;  
+  components new FakeSensorC();
+  
 /****** INTERFACES *****/
   //Boot interface
   App.Boot -> MainC.Boot;

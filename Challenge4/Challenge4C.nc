@@ -28,6 +28,7 @@ module Challenge4C {
   uint8_t counter=0;
   uint8_t rec_id;
   message_t packet;
+  bool requestShutdown = FALSE; // used only for mote 1
 
   void sendReq();
   void sendResp();
@@ -54,9 +55,9 @@ module Challenge4C {
 
 	//Send an UNICAST message to the correct node
 	if(call AMSend.send(2, &packet,sizeof(my_msg_t)) == SUCCESS){
-	    dbg("radio_pack",">>>Pack sent:\n \t Payload length %hhu \n", call Packet.payloadLength(&packet));
+	    dbg("radio_pack",">>>Pack sent (1-->2):\n \t Payload length %hhu \n", call Packet.payloadLength(&packet));
 	    dbg_clear("radio_pack","\t Payload Sent\n");
-		dbg_clear("radio_pack", "\t\t type: %s\n", msg->msg_type);
+		dbg_clear("radio_pack", "\t\t type: %d\n", msg->msg_type);
 		dbg_clear("radio_pack", "\t\t counter: %hhu\n", msg->msg_counter);
 		dbg_clear("radio_pack", "\t\t value: %hhu\n", msg->value);	 
   	}
@@ -83,16 +84,21 @@ module Challenge4C {
 			call Timer.startPeriodic(1000);
 		}
 	}
+	else
+		dbgerror("radio", "Radio offline!\n");
   }
   
   event void SplitControl.stopDone(error_t err){
-    dbg("role", "Mote %d was shut down \n", TOS_NODE_ID);
+    dbg("role", "Mote %d was shut down at %s \n", TOS_NODE_ID, sim_time_string());
   }
 
   //***************** MilliTimer interface ********************//
   event void Timer.fired() {
 	dbg("boot", "Timer was fired\n");
-	sendReq();
+	if (requestShutdown)
+		call SplitControl.stop();
+	else 
+		sendReq();	// Only mote 1 has timer
   }
   
 
@@ -104,8 +110,8 @@ module Challenge4C {
 	//Check if the packet is sent
 	if (&packet == buf && err == SUCCESS) {
       	dbg("radio_send", "Packet sent at time %s \n", sim_time_string());
-		counter++;
 		if(msg->msg_type == REQ){
+			counter++;
 			dbg("radio_send", "Counter increased to %hhu\n", counter);
 		}
     }
@@ -118,11 +124,11 @@ module Challenge4C {
       	dbg_clear("radio_ack", "\t\tAck received at time %s (counter is %hhu)\n", sim_time_string(), msg->msg_counter);
 
 		if(msg->msg_type == RESP){
-			call SplitControl.stop();
+			call SplitControl.stop(); // Ack Received for RESP msg -> STOP
 		}
-		else{
+		else if (msg->msg_type == REQ ){
 			dbg("radio", "Timer stopped.\n");
-			call Timer.stop();
+			call Timer.stop();	// Ack Received for REQ msg -> STOP timer = don't forward any other requests
 		}
     }
     else{
@@ -140,8 +146,8 @@ module Challenge4C {
 		//Read the content of the message
     	dbg("radio_rec", "Received packet at time %s\n", sim_time_string());
     	dbg("radio_pack",">>>Pack \n \t Payload length %hhu \n", call Packet.payloadLength(buf));
-    	dbg_clear("radio_pack","\t\t Payload Received\n" );
-    	dbg_clear("radio_pack", "\t\t type: %s \n", msg->msg_type);
+    	dbg_clear("radio_pack","\t Payload Received\n" );
+    	dbg_clear("radio_pack", "\t\t type: %d\n", msg->msg_type);
 		dbg_clear("radio_pack", "\t\t counter: %hhu\n", msg->msg_counter);
 		dbg_clear("radio_pack", "\t\t value: %hhu\n", msg->value);
 
@@ -152,10 +158,11 @@ module Challenge4C {
 			rec_id = msg->msg_counter;
 			sendResp();
 
-		} else {
+		} else if (msg->msg_type == RESP) {
 
-			dbg("radio_rec", "Response received (sensor value is %hhu)\n", msg->value);
-			call Timer.startOneShot(1);
+			dbg_clear("radio_rec", " *** Response received (sensor value is %hhu) *** \n", msg->value);
+			requestShutdown = TRUE;
+			call Timer.startOneShot(50); // Spin one more time to keep radio on - to send the ack
 		}
 	}
     else {
@@ -184,11 +191,12 @@ module Challenge4C {
 
 	//Send back (with a unicast message) the response
 	if(call AMSend.send(1, &packet,sizeof(my_msg_t)) == SUCCESS){
-	    dbg("radio_pack",">>>Pack sent\n \t Payload length %hhu \n", call Packet.payloadLength(&packet));
+	    dbg("radio_pack",">>>Pack sent (2 -> 1):\n \t Payload length %hhu \n", call Packet.payloadLength(&packet));
 	    dbg_clear("radio_pack","\t Payload Sent\n");
-		dbg_clear("radio_pack", "\t\t type: %s\n", msg->msg_type);
+		dbg_clear("radio_pack", "\t\t type: %d\n", msg->msg_type);
 		dbg_clear("radio_pack", "\t\t counter: %hhu\n", msg->msg_counter);
 		dbg_clear("radio_pack", "\t\t value: %hhu\n", msg->value); 
   	}
+  }
 }
 
