@@ -1,3 +1,4 @@
+#include "printf.h"	
 #include "DistanceKeeper.h"
 #include "Timer.h"
 
@@ -20,7 +21,10 @@ module DistanceKeeperC
 implementation 
 {
 	bool locked = FALSE;
-  	uint8_t probeCounters[MAX_MOTE_NUM] = 0;
+  	uint32_t probeCounters[MAX_MOTE_NUM];
+  	uint8_t lastIncrementalIds[MAX_MOTE_NUM];
+  	uint8_t currentMsgId;
+  	
   	message_t packet;
 
   	void sendProbe();
@@ -31,7 +35,7 @@ implementation
 		//Prepare the msg
 		probe_msg_t* msg = (probe_msg_t*)call Packet.getPayload(&packet, sizeof(probe_msg_t));
 		msg->senderId = TOS_NODE_ID;
-	
+		msg->incrementalId = currentMsgId;
 
 		//Send the probe in BROADCAST
 		if (call AMSend.send(AM_BROADCAST_ADDR, &packet, sizeof(probe_msg_t)) == SUCCESS)
@@ -42,6 +46,13 @@ implementation
 	//***************** Boot interface ********************//
 	event void Boot.booted() 
 	{
+		uint16_t i;
+		for (i = 0; i < MAX_MOTE_NUM; i++)
+			probeCounters[i] = 0;
+		
+		currentMsgId = 0;
+		
+	
 		call SplitControl.start();
 	}
 
@@ -59,7 +70,7 @@ implementation
   
 	event void SplitControl.stopDone(error_t err)
 	{
-		printf("Mote %d was shut down at %s\n", TOS_NODE_ID, sim_time_string());
+		printf("Mote %d was shut down\n", TOS_NODE_ID);
 		printfflush();
 	}
 
@@ -75,7 +86,10 @@ implementation
 	event void AMSend.sendDone(message_t* buf, error_t err) 
 	{
 		if (&packet == buf)
+		{
+			currentMsgId++;
 			locked = FALSE;
+		}
 	}
 
 	//***************************** Receive interface *****************//
@@ -83,8 +97,7 @@ implementation
 	{
 		if (len == sizeof(probe_msg_t)) 
 		{
-			my_msg_t* msg = (probe_msg_t*)payload;
-
+			probe_msg_t* msg = (probe_msg_t*)payload;
 			if (msg->senderId >= MAX_MOTE_NUM)
 			{				
 				printf("Unexpected sender mote!\n");
@@ -92,16 +105,26 @@ implementation
 			}
 			else
 			{
-				printf("Probe received from %d\n", msg->senderId);
+				if (lastIncrementalIds[msg->senderId] + 1 < msg->incrementalId) // Overflow is correctly handled (255 + 1 == 0) 
+				{
+					// Found a discontinuity
+					probeCounters[msg->senderId] = 0;	
+					printf("I skipped a msg! Reset\n");		
+				}							
+				
+				// Update current state
+				lastIncrementalIds[msg->senderId] = msg->incrementalId;
 				probeCounters[msg->senderId]++;
-				// TODO: Check continuity of the msg
+				printf("From %d) continuos probes=%d\n", msg->senderId, probeCounters[msg->senderId]);
 				
-				
-				printf("From %d) count = %d\n", msg->senderId, probeCounters[msg->senderId]);
+				if (probeCounters[msg->senderId] >= MIN_PROBE_COUNT_ALARM) // 10
+				{
+					
+				}				
 			}
 		}
 		else 
-			printf("Recieved an unknown msg!\n");
+			printf("Received an unknown msg!\n");
 
 		printfflush();
 		return buf;

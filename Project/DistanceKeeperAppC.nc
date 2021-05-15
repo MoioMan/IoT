@@ -1,3 +1,6 @@
+#define NEW_PRINTF_SEMANTICS // Suppress a warning
+
+#include "printf.h"
 #include "DistanceKeeper.h"
 
 configuration DistanceKeeperAppC {}
@@ -11,6 +14,8 @@ implementation {
   components new AMReceiverC(AM_PROBE_MSG);
   components new TimerMilliC() as Timer;
   components ActiveMessageC;  
+  components PrintfC;			// For printf
+  components SerialStartC;  // For printf
   
   // Socket forward components
   
