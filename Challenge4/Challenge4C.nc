@@ -162,7 +162,7 @@ module Challenge4C {
 
 			dbg_clear("radio_rec", " *** Response received (sensor value is %u) *** \n", msg->value);
 			requestShutdown = TRUE;
-			call Timer.startOneShot(50); // Spin one more time to keep radio on - to send the ack
+			call Timer.startOneShot(200); // Spin one more time to keep radio on - to send the ack
 		}
 	}
     else {

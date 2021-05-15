@@ -1,0 +1,317 @@
+********************************************
+*                                          *
+*             TOSSIM Script                *
+*                                          *
+********************************************
+Initializing mac....
+Initializing radio channels....
+    using topology file: topology.txt
+    using noise file: meyer-heavy.txt
+Initializing simulator....
+Activate debug message on channel init
+Activate debug message on channel boot
+Activate debug message on channel radio
+Activate debug message on channel radio_send
+Activate debug message on channel radio_ack
+Activate debug message on channel radio_rec
+Activate debug message on channel radio_pack
+Activate debug message on channel role
+Creating node 1...
+>>>Will boot at time 0 [sec]
+Creating node 2...
+>>>Will boot at time 5 [sec]
+Creating radio channels...
+>>>Setting radio channel from node  1  to node  2  with gain  -60.0  dBm
+>>>Setting radio channel from node  2  to node  1  with gain  -60.0  dBm
+Initializing Closest Pattern Matching (CPM)...
+Reading noise model data file: meyer-heavy.txt
+Loading:##Done!
+>>>Creating noise model for node: 1
+>>>Creating noise model for node: 2
+Start simulation with TOSSIM! 
+
+
+
+DEBUG (1): Interface booted
+DEBUG (1): Radio is on.
+DEBUG (1): NodeID 1: timer started.
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 0
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 0
+		 value: 0
+DEBUG (1): Packet sent at time 0:0:0.985794023 
+DEBUG (1): Counter increased to 1
+ERROR (1): Receiving error (no ack)
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 1
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 1
+		 value: 0
+DEBUG (1): Packet sent at time 0:0:1.955551143 
+DEBUG (1): Counter increased to 2
+ERROR (1): Receiving error (no ack)
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 2
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 2
+		 value: 0
+DEBUG (1): Packet sent at time 0:0:2.932998647 
+DEBUG (1): Counter increased to 3
+ERROR (1): Receiving error (no ack)
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 3
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 3
+		 value: 0
+DEBUG (1): Packet sent at time 0:0:3.913757290 
+DEBUG (1): Counter increased to 4
+ERROR (1): Receiving error (no ack)
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 4
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 4
+		 value: 0
+DEBUG (1): Packet sent at time 0:0:4.888351418 
+DEBUG (1): Counter increased to 5
+ERROR (1): Receiving error (no ack)
+DEBUG (2): Interface booted
+DEBUG (2): Radio is on.
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 5
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 5
+		 value: 0
+DEBUG (1): Packet sent at time 0:0:5.863815291 
+DEBUG (1): Counter increased to 6
+ERROR (1): Receiving error (no ack)
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 6
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 6
+		 value: 0
+DEBUG (2): Received packet at time 0:0:6.839538563
+DEBUG (2): >>>Pack 
+ 	 Payload length 5 
+	 Payload Received
+		 type: 1
+		 counter: 6
+		 value: 0
+DEBUG (2): Request received
+DEBUG (2): Sensor reading
+DEBUG (1): Packet sent at time 0:0:6.839706408 
+DEBUG (1): Counter increased to 7
+		Ack received at time 0:0:6.839706408 (counter is 6)
+DEBUG (1): Timer stopped.
+DEBUG (2): Sending response from mote 2 to 1
+DEBUG (2): ACK requested
+DEBUG (2): >>>Pack sent (2 -> 1):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 2
+		 counter: 6
+		 value: 50421
+DEBUG (1): Received packet at time 0:0:6.850357055
+DEBUG (1): >>>Pack 
+ 	 Payload length 5 
+	 Payload Received
+		 type: 2
+		 counter: 6
+		 value: 50421
+ *** Response received (sensor value is 50421) *** 
+DEBUG (2): Packet sent at time 0:0:6.850524901 
+		Ack received at time 0:0:6.850524901 (counter is 6)
+DEBUG (2): Mote 2 was shut down at 0:0:6.850524911 
+DEBUG (1): Timer was fired
+DEBUG (1): Mote 1 was shut down at 0:0:7.044921895 
+
+
+
+Simulation finished!
+********************************************
+*                                          *
+*             TOSSIM Script                *
+*                                          *
+********************************************
+Initializing mac....
+Initializing radio channels....
+    using topology file: topology.txt
+    using noise file: meyer-heavy.txt
+Initializing simulator....
+Activate debug message on channel init
+Activate debug message on channel boot
+Activate debug message on channel radio
+Activate debug message on channel radio_send
+Activate debug message on channel radio_ack
+Activate debug message on channel radio_rec
+Activate debug message on channel radio_pack
+Activate debug message on channel role
+Creating node 1...
+>>>Will boot at time 0 [sec]
+Creating node 2...
+>>>Will boot at time 5 [sec]
+Creating radio channels...
+>>>Setting radio channel from node  1  to node  2  with gain  -60.0  dBm
+>>>Setting radio channel from node  2  to node  1  with gain  -60.0  dBm
+Initializing Closest Pattern Matching (CPM)...
+Reading noise model data file: meyer-heavy.txt
+Loading:##Done!
+>>>Creating noise model for node: 1
+>>>Creating noise model for node: 2
+Start simulation with TOSSIM! 
+
+
+
+DEBUG (1): Interface booted
+DEBUG (1): Radio is on.
+DEBUG (1): NodeID 1: timer started.
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 0
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 0
+		 value: 0
+DEBUG (1): Packet sent at time 0:0:0.982406592 
+DEBUG (1): Counter increased to 1
+ERROR (1): Receiving error (no ack)
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 1
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 1
+		 value: 0
+DEBUG (1): Packet sent at time 0:0:1.963745065 
+DEBUG (1): Counter increased to 2
+ERROR (1): Receiving error (no ack)
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 2
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 2
+		 value: 0
+DEBUG (1): Packet sent at time 0:0:2.932739250 
+DEBUG (1): Counter increased to 3
+ERROR (1): Receiving error (no ack)
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 3
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 3
+		 value: 0
+DEBUG (1): Packet sent at time 0:0:3.915939284 
+DEBUG (1): Counter increased to 4
+ERROR (1): Receiving error (no ack)
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 4
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 4
+		 value: 0
+DEBUG (1): Packet sent at time 0:0:4.888122537 
+DEBUG (1): Counter increased to 5
+ERROR (1): Receiving error (no ack)
+DEBUG (2): Interface booted
+DEBUG (2): Radio is on.
+DEBUG (1): Timer was fired
+DEBUG (1): Creating message
+DEBUG (1): Sending request (counter is 5
+)DEBUG (1): ACK requested
+DEBUG (1): >>>Pack sent (1-->2):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 1
+		 counter: 5
+		 value: 0
+DEBUG (2): Received packet at time 0:0:5.863204943
+DEBUG (2): >>>Pack 
+ 	 Payload length 5 
+	 Payload Received
+		 type: 1
+		 counter: 5
+		 value: 0
+DEBUG (2): Request received
+DEBUG (2): Sensor reading
+DEBUG (1): Packet sent at time 0:0:5.863372789 
+DEBUG (1): Counter increased to 6
+		Ack received at time 0:0:5.863372789 (counter is 5)
+DEBUG (1): Timer stopped.
+DEBUG (2): Sending response from mote 2 to 1
+DEBUG (2): ACK requested
+DEBUG (2): >>>Pack sent (2 -> 1):
+ 	 Payload length 5 
+	 Payload Sent
+		 type: 2
+		 counter: 5
+		 value: 50421
+DEBUG (1): Received packet at time 0:0:5.879363981
+DEBUG (1): >>>Pack 
+ 	 Payload length 5 
+	 Payload Received
+		 type: 2
+		 counter: 5
+		 value: 50421
+ *** Response received (sensor value is 50421) *** 
+DEBUG (2): Packet sent at time 0:0:5.879531826 
+		Ack received at time 0:0:5.879531826 (counter is 5)
+DEBUG (2): Mote 2 was shut down at 0:0:5.879531836 
+DEBUG (1): Timer was fired
+DEBUG (1): Mote 1 was shut down at 0:0:6.074218770 
+
+
+
+Simulation finished!
