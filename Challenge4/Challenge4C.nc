@@ -59,7 +59,7 @@ module Challenge4C {
 	    dbg_clear("radio_pack","\t Payload Sent\n");
 		dbg_clear("radio_pack", "\t\t type: %d\n", msg->msg_type);
 		dbg_clear("radio_pack", "\t\t counter: %hhu\n", msg->msg_counter);
-		dbg_clear("radio_pack", "\t\t value: %hhu\n", msg->value);	 
+		dbg_clear("radio_pack", "\t\t value: %u\n", msg->value);	 
   	}
  }        
 
@@ -149,7 +149,7 @@ module Challenge4C {
     	dbg_clear("radio_pack","\t Payload Received\n" );
     	dbg_clear("radio_pack", "\t\t type: %d\n", msg->msg_type);
 		dbg_clear("radio_pack", "\t\t counter: %hhu\n", msg->msg_counter);
-		dbg_clear("radio_pack", "\t\t value: %hhu\n", msg->value);
+		dbg_clear("radio_pack", "\t\t value: %u\n", msg->value);
 
 		// Check if the type is request (REQ)
 		if (msg->msg_type == REQ) {
@@ -160,7 +160,7 @@ module Challenge4C {
 
 		} else if (msg->msg_type == RESP) {
 
-			dbg_clear("radio_rec", " *** Response received (sensor value is %hhu) *** \n", msg->value);
+			dbg_clear("radio_rec", " *** Response received (sensor value is %u) *** \n", msg->value);
 			requestShutdown = TRUE;
 			call Timer.startOneShot(50); // Spin one more time to keep radio on - to send the ack
 		}
@@ -195,7 +195,7 @@ module Challenge4C {
 	    dbg_clear("radio_pack","\t Payload Sent\n");
 		dbg_clear("radio_pack", "\t\t type: %d\n", msg->msg_type);
 		dbg_clear("radio_pack", "\t\t counter: %hhu\n", msg->msg_counter);
-		dbg_clear("radio_pack", "\t\t value: %hhu\n", msg->value); 
+		dbg_clear("radio_pack", "\t\t value: %u\n", msg->value); 
   	}
   }
 }
