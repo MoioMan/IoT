@@ -1,6 +1,7 @@
-#include "printf.h"	
+#include "printf.h"
 #include "DistanceKeeper.h"
 #include "Timer.h"
+#include "string.h"
 
 module DistanceKeeperC 
 {
@@ -13,7 +14,7 @@ module DistanceKeeperC
 	interface AMSend;
 	interface SplitControl;
   	interface Receive;
-
+  	
 	//interface for timer
 	interface Timer<TMilli> as Timer;		
   }
@@ -21,13 +22,23 @@ module DistanceKeeperC
 implementation 
 {
 	bool locked = FALSE;
+	bool serialLocked = FALSE;
+	
   	uint32_t probeCounters[MAX_MOTE_NUM];
   	uint8_t lastIncrementalIds[MAX_MOTE_NUM];
   	uint8_t currentMsgId;
   	
   	message_t packet;
+  	message_t alert_packet;
+	
+	
+#ifndef SERIAL_DEBUG
+#define printf emptyPrintf
+#endif	
+	void emptyPrintf(char* buff, ...) { }
 
   	void sendProbe();
+  	void sendAlert();
   
   	//***************** Send probe function ********************//
 	void sendProbe() 
@@ -42,6 +53,32 @@ implementation
 			locked = TRUE;
 	}        
 
+	void sendAlert()
+	{
+		
+		uint16_t i, j;		
+		char msgBuff[2 * MAX_MOTE_NUM + 1];
+		msgBuff[0] = TOS_NODE_ID + '0';
+		msgBuff[1] = ',';
+		j = 2;
+		for (i = 0; i < MAX_MOTE_NUM; i++)
+		{
+			if (probeCounters[i] >= MIN_PROBE_COUNT_ALARM)
+			{
+				msgBuff[j] = i + '0';
+				msgBuff[j + 1] = ',';
+				j += 2;
+			}
+		}
+		//"0,2,"
+		msgBuff[j - 1] = 0x00;	
+			
+#undef printf
+		printf("%s\n", msgBuff);	// ex: 1,2,5		
+#ifndef SERIAL_DEBUG
+#define printf emptyPrintf
+#endif	
+	}
 
 	//***************** Boot interface ********************//
 	event void Boot.booted() 
@@ -66,14 +103,12 @@ implementation
 			printf("Radio offline!\n");
 			printfflush();
 		}
-	}
-  
+	}  
 	event void SplitControl.stopDone(error_t err)
 	{
 		printf("Mote %d was shut down\n", TOS_NODE_ID);
 		printfflush();
 	}
-
 	//***************** MilliTimer interface ********************//
 	event void Timer.fired() 
 	{
@@ -91,7 +126,6 @@ implementation
 			locked = FALSE;
 		}
 	}
-
 	//***************************** Receive interface *****************//
 	event message_t* Receive.receive(message_t* buf, void* payload, uint8_t len) 
 	{
@@ -119,7 +153,7 @@ implementation
 				
 				if (probeCounters[msg->senderId] >= MIN_PROBE_COUNT_ALARM) // 10
 				{
-					
+					sendAlert();
 				}				
 			}
 		}

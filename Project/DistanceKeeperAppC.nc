@@ -14,10 +14,10 @@ implementation {
   components new AMReceiverC(AM_PROBE_MSG);
   components new TimerMilliC() as Timer;
   components ActiveMessageC;  
-  components PrintfC;			// For printf
-  components SerialStartC;  // For printf
+
+  components PrintfC;		// For printf
+  components SerialStartC;  // For printf - start serial channel at boot
   
-  // Socket forward components
   
 /****** INTERFACES *****/
   //Boot interface
