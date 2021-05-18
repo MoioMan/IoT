@@ -1,0 +1,133 @@
+[
+    {
+        "id": "b5d1af96.0416f8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7129c34d.0086cc",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60001",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 230,
+        "y": 540,
+        "wires": [
+            [
+                "4c714f33.828b08"
+            ]
+        ]
+    },
+    {
+        "id": "3fb06d58.b871a2",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60002",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 230,
+        "y": 600,
+        "wires": [
+            [
+                "4c714f33.828b08"
+            ]
+        ]
+    },
+    {
+        "id": "87a79771.4a068",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60003",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 230,
+        "y": 660,
+        "wires": [
+            [
+                "4c714f33.828b08"
+            ]
+        ]
+    },
+    {
+        "id": "f1c576d3.34e12",
+        "type": "function",
+        "z": "b5d1af96.0416f8",
+        "name": "buildMessage",
+        "func": "msg.payload = \"message by user \" + msg.payload.substring(0,1) + \", who is near users (\" + msg.payload.substring(2,msg.payload.lengh) + \")\";\n\nreturn msg",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 690,
+        "y": 600,
+        "wires": [
+            [
+                "f5d6c5eb.47624"
+            ]
+        ]
+    },
+    {
+        "id": "cae77e3.5c247",
+        "type": "file",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "filename": "log.txt",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "x": 770,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f5d6c5eb.47624",
+        "type": "debug",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "x": 890,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "4c714f33.828b08",
+        "type": "function",
+        "z": "b5d1af96.0416f8",
+        "name": "cleanInput",
+        "func": "msg.payload = msg.payload.substring(msg.payload.search(\"d\") +1,msg.payload.length);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 510,
+        "y": 600,
+        "wires": [
+            [
+                "f1c576d3.34e12"
+            ]
+        ]
+    }
+]
