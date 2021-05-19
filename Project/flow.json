@@ -81,7 +81,8 @@
         "y": 600,
         "wires": [
             [
-                "f5d6c5eb.47624"
+                "f5d6c5eb.47624",
+                "c2fa9c4.d3c7ee"
             ]
         ]
     },
@@ -90,12 +91,12 @@
         "type": "file",
         "z": "b5d1af96.0416f8",
         "name": "",
-        "filename": "log.txt",
+        "filename": "REMINDER TO LOG",
         "appendNewline": true,
-        "createDir": false,
+        "createDir": true,
         "overwriteFile": "false",
-        "x": 770,
-        "y": 380,
+        "x": 920,
+        "y": 400,
         "wires": [
             []
         ]
@@ -137,7 +138,7 @@
         "name": "",
         "method": "POST",
         "ret": "txt",
-        "url": "https://maker.ifttt.com/trigger/{{event}}/with/key/d-ZTsd02kJhQhEJ7LG9vHRmx4KmwMmzGr10CvBGHyMu",
+        "url": "https://maker.ifttt.com/trigger/distance_keeper/with/key/d-ZTsd02kJhQhEJ7LG9vHRmx4KmwMmzGr10CvBGHyMu",
         "tls": "",
         "x": 1110,
         "y": 600,
@@ -149,35 +150,15 @@
         "id": "c2fa9c4.d3c7ee",
         "type": "function",
         "z": "b5d1af96.0416f8",
-        "name": "",
-        "func": "msg.event = \"distance_keeper\";\nmsg.payload = {\"Value1\" : \"ciao\"};\nreturn msg;",
+        "name": "buildNotification",
+        "func": "msg.event = \"distance_keeper\";\nstringa = msg.neighbours.toString();\nmsg.payload = {\"value1\" : stringa };\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 850,
+        "x": 860,
         "y": 600,
         "wires": [
             [
                 "c88e2d17.9212d"
-            ]
-        ]
-    },
-    {
-        "id": "bb64292d.ff3cf",
-        "type": "inject",
-        "z": "b5d1af96.0416f8",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "x": 700,
-        "y": 760,
-        "wires": [
-            [
-                "c2fa9c4.d3c7ee"
             ]
         ]
     }
