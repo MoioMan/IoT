@@ -12,7 +12,8 @@ implementation {
   
   components new AMSenderC(AM_PROBE_MSG);
   components new AMReceiverC(AM_PROBE_MSG);
-  components new TimerMilliC() as Timer;
+  components new TimerMilliC() as SenderTimer;
+  components new TimerMilliC() as CheckTimer;
   components ActiveMessageC;  
 
   components PrintfC;		// For printf
@@ -33,6 +34,7 @@ implementation {
   App.SplitControl -> ActiveMessageC;
 
   //Timer interface
-  App.Timer -> Timer;
+  App.SenderTimer -> SenderTimer;
+  App.CheckTimer -> CheckTimer;
 }
 
