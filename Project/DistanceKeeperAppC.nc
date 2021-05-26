@@ -16,8 +16,7 @@ implementation {
   components new TimerMilliC() as CheckTimer;
   components ActiveMessageC;  
 
-  components PrintfC;		// For printf
-  components SerialStartC;  // For printf - start serial channel at boot
+  components SerialPrintfC; // For serial printf
   
   
 /****** INTERFACES *****/

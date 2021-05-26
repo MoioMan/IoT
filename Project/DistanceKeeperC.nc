@@ -38,9 +38,7 @@ implementation
 #endif	
 	void emptyPrintf(char* buff, ...) { }	// Disable printf if not debugging
 
-  	void sendProbe();
-  	void sendAlert();
-  
+
 	void sendProbe() 
 	{
 		//Prepare the msg
@@ -54,10 +52,7 @@ implementation
 	}        
 
 	void sendAlert()
-	{		
-		static uint32_t count_before_send = 0;
-		static uint32_t threshold_before_send = 1; 
-		
+	{				
 		uint16_t i, j;		
 		char msgBuff[2 * MAX_MOTE_NUM + 1];
 		// Build alarm in such a way: {this id},{near mote ids},...
@@ -75,29 +70,18 @@ implementation
 		}
 		msgBuff[j - 1] = 0x00;	// remove last comma
 			
-		// Avoid sending the same alert (same near motes = same message) too much
-		// Send it with an exponential decreasing rate. Reset when something changes
+		// Avoid sending the same alert (same near motes = same message)
+		// Send it only when it changes
 		if (strncmp(msgBuff, lastMsg, 2 * MAX_MOTE_NUM + 1) != 0)
-		{
-			// Reset 
-			count_before_send = 0;
-			threshold_before_send = 1;
-		}
+		{		
+			strncpy(lastMsg, msgBuff, 2 * MAX_MOTE_NUM + 1);	// Store the actual cluster	
 		
-		strncpy(lastMsg, msgBuff, 2 * MAX_MOTE_NUM + 1);	// Store the actual cluster	
-		count_before_send++;
-		
-		if (count_before_send >= threshold_before_send)
-		{
 // Enable only this printf
 #undef printf 
 			printf("%s\n", msgBuff);	// ex: 1,2,5		
 #ifndef SERIAL_DEBUG
 #define printf emptyPrintf
 #endif				
-			count_before_send = 0;
-			threshold_before_send *= 2;
-			threshold_before_send = threshold_before_send > MAX_THRESHOLD_BEFORE_SEND ? MAX_THRESHOLD_BEFORE_SEND : threshold_before_send;
 		}
 	}
 
