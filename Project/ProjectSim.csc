@@ -46,8 +46,8 @@
       <breakpoints />
       <interface_config>
         org.contikios.cooja.interfaces.Position
-        <x>92.2163665265699</x>
-        <y>104.81600417138752</y>
+        <x>95.12657753249637</x>
+        <y>62.90896568604634</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -64,8 +64,8 @@
       <breakpoints />
       <interface_config>
         org.contikios.cooja.interfaces.Position
-        <x>121.82482760715419</x>
-        <y>43.7721333032835</y>
+        <x>116.58644779648655</x>
+        <y>40.27988009617174</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -82,8 +82,8 @@
       <breakpoints />
       <interface_config>
         org.contikios.cooja.interfaces.Position
-        <x>34.5257191986964</x>
-        <y>28.706048269624233</y>
+        <x>6.005651340616999</x>
+        <y>93.89477480237714</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -100,8 +100,8 @@
       <breakpoints />
       <interface_config>
         org.contikios.cooja.interfaces.Position
-        <x>115.57694657746352</x>
-        <y>84.41204437538605</y>
+        <x>126.63574839998411</x>
+        <y>71.60711594930957</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -136,8 +136,8 @@
       <breakpoints />
       <interface_config>
         org.contikios.cooja.interfaces.Position
-        <x>17.93162598675377</x>
-        <y>20.565218114949204</y>
+        <x>8.61895076778905</x>
+        <y>32.20606213865508</y>
         <z>0.0</z>
       </interface_config>
       <interface_config>
@@ -154,7 +154,7 @@
   <plugin>
     org.contikios.cooja.plugins.SimControl
     <width>280</width>
-    <z>0</z>
+    <z>1</z>
     <height>160</height>
     <location_x>400</location_x>
     <location_y>0</location_y>
@@ -170,7 +170,7 @@
       <viewport>1.7180884787452875 0.0 0.0 1.7180884787452875 81.36160483569775 67.9476291621149</viewport>
     </plugin_config>
     <width>400</width>
-    <z>8</z>
+    <z>0</z>
     <height>400</height>
     <location_x>1</location_x>
     <location_y>1</location_y>
@@ -183,7 +183,7 @@
       <coloring />
     </plugin_config>
     <width>1192</width>
-    <z>1</z>
+    <z>2</z>
     <height>240</height>
     <location_x>400</location_x>
     <location_y>160</location_y>
@@ -228,7 +228,7 @@
       <bound>true</bound>
     </plugin_config>
     <width>362</width>
-    <z>7</z>
+    <z>8</z>
     <height>116</height>
     <location_x>26</location_x>
     <location_y>410</location_y>
@@ -241,7 +241,7 @@
       <bound>true</bound>
     </plugin_config>
     <width>362</width>
-    <z>4</z>
+    <z>5</z>
     <height>116</height>
     <location_x>391</location_x>
     <location_y>414</location_y>
@@ -254,7 +254,7 @@
       <bound>true</bound>
     </plugin_config>
     <width>362</width>
-    <z>3</z>
+    <z>4</z>
     <height>116</height>
     <location_x>763</location_x>
     <location_y>412</location_y>
@@ -267,7 +267,7 @@
       <bound>true</bound>
     </plugin_config>
     <width>362</width>
-    <z>2</z>
+    <z>3</z>
     <height>116</height>
     <location_x>1146</location_x>
     <location_y>413</location_y>
@@ -280,7 +280,7 @@
       <bound>true</bound>
     </plugin_config>
     <width>362</width>
-    <z>6</z>
+    <z>7</z>
     <height>116</height>
     <location_x>8</location_x>
     <location_y>554</location_y>
@@ -293,7 +293,7 @@
       <bound>true</bound>
     </plugin_config>
     <width>362</width>
-    <z>5</z>
+    <z>6</z>
     <height>116</height>
     <location_x>400</location_x>
     <location_y>554</location_y>
