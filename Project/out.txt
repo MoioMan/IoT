@@ -1,0 +1,57 @@
+00:04.821	ID:4	Node 2 is approaching
+00:04.821	ID:1	Node 2 is approaching
+00:04.830	ID:5	Node 6 is approaching
+00:04.933	ID:1	Node 4 is approaching
+00:04.933	ID:2	Node 4 is approaching
+00:04.965	ID:2	Node 1 is approaching
+00:04.965	ID:4	Node 1 is approaching
+00:05.302	ID:6	Node 5 is approaching
+00:09.214	ID:1	1,2
+00:09.214	ID:4	4,2
+00:09.231	ID:5	5,6
+00:09.328	ID:2	2,4
+00:09.328	ID:1	1,2,4
+00:09.355	ID:2	2,1,4
+00:09.355	ID:4	4,1,2
+00:09.690	ID:6	6,5
+00:14.275	ID:6	Node 3 is approaching
+00:14.600	ID:3	Node 6 is approaching
+00:18.666	ID:6	6,3,5
+00:18.989	ID:3	3,6
+00:37.639	ID:4	Node 1 is no more near
+00:37.673	ID:1	Node 2 is no more near
+00:37.674	ID:1	Node 4 is no more near
+00:38.022	ID:4	4,2
+00:38.356	ID:2	Node 1 is no more near
+00:38.620	ID:2	2,4
+00:52.657	ID:1	Node 5 is approaching
+00:52.682	ID:1	Node 6 is approaching
+00:52.817	ID:3	Node 1 is approaching
+00:52.817	ID:6	Node 1 is approaching
+00:52.817	ID:5	Node 1 is approaching
+00:52.841	ID:1	Node 3 is approaching
+00:57.054	ID:1	1,5
+00:57.074	ID:1	1,5,6
+00:57.211	ID:3	3,1,6
+00:57.211	ID:5	5,1,6
+00:57.211	ID:6	6,1,3,5
+00:57.237	ID:1	1,3,5,6
+01:12.222	ID:3	Node 6 is no more near
+01:12.346	ID:3	3,1
+01:12.404	ID:6	Node 3 is no more near
+01:12.678	ID:6	6,1,5
+01:14.064	ID:6	Node 1 is no more near
+01:14.149	ID:6	6,5
+01:14.195	ID:1	Node 6 is no more near
+01:14.325	ID:1	1,3,5
+01:16.106	ID:6	Node 2 is approaching
+01:16.127	ID:2	Node 6 is approaching
+01:16.188	ID:5	Node 6 is no more near
+01:16.254	ID:5	5,1
+01:16.554	ID:6	Node 5 is no more near
+01:19.052	ID:4	Node 6 is approaching
+01:19.151	ID:6	Node 4 is approaching
+01:20.504	ID:6	6,2
+01:20.513	ID:2	2,4,6
+01:23.446	ID:4	4,2,6
+01:23.539	ID:6	6,2,4
