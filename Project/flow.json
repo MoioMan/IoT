@@ -23,7 +23,7 @@
         "y": 540,
         "wires": [
             [
-                "4c714f33.828b08"
+                "60517a5.25d2604"
             ]
         ]
     },
@@ -44,7 +44,7 @@
         "y": 600,
         "wires": [
             [
-                "4c714f33.828b08"
+                "60517a5.25d2604"
             ]
         ]
     },
@@ -65,7 +65,7 @@
         "y": 660,
         "wires": [
             [
-                "4c714f33.828b08"
+                "60517a5.25d2604"
             ]
         ]
     },
@@ -77,28 +77,13 @@
         "func": "msg.user = msg.payload.substring(0,1);\nmsg.neighbours = msg.payload.substring(2,msg.payload.lengh)\nmsg.payload = \"message by user \" + msg.user + \", who is near users (\" + msg.neighbours + \")\";\nreturn msg",
         "outputs": 1,
         "noerr": 0,
-        "x": 670,
-        "y": 600,
+        "x": 690,
+        "y": 692,
         "wires": [
             [
                 "f5d6c5eb.47624",
                 "c2fa9c4.d3c7ee"
             ]
-        ]
-    },
-    {
-        "id": "cae77e3.5c247",
-        "type": "file",
-        "z": "b5d1af96.0416f8",
-        "name": "",
-        "filename": "REMINDER TO LOG",
-        "appendNewline": true,
-        "createDir": true,
-        "overwriteFile": "false",
-        "x": 920,
-        "y": 400,
-        "wires": [
-            []
         ]
     },
     {
@@ -111,25 +96,9 @@
         "console": false,
         "tostatus": false,
         "complete": "payload",
-        "x": 930,
-        "y": 500,
+        "x": 950,
+        "y": 592,
         "wires": []
-    },
-    {
-        "id": "4c714f33.828b08",
-        "type": "function",
-        "z": "b5d1af96.0416f8",
-        "name": "cleanInput",
-        "func": "msg.payload = msg.payload.substring(1+msg.payload.search(\"d\"), msg.payload.length);\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 510,
-        "y": 600,
-        "wires": [
-            [
-                "f1c576d3.34e12"
-            ]
-        ]
     },
     {
         "id": "c88e2d17.9212d",
@@ -140,8 +109,8 @@
         "ret": "txt",
         "url": "https://maker.ifttt.com/trigger/distance_keeper/with/key/d-ZTsd02kJhQhEJ7LG9vHRmx4KmwMmzGr10CvBGHyMu",
         "tls": "",
-        "x": 1110,
-        "y": 600,
+        "x": 1130,
+        "y": 692,
         "wires": [
             []
         ]
@@ -151,14 +120,103 @@
         "type": "function",
         "z": "b5d1af96.0416f8",
         "name": "buildNotification",
-        "func": "msg.event = \"distance_keeper\";\nstringa = msg.neighbours.toString();\nmsg.payload = {\"value1\" : stringa };\n\nreturn msg;",
+        "func": "msg.event = \"distance_keeper\";\nvalue1 = msg.user.toString();\nvalue2 = msg.neighbours.toString();\n\nmsg.payload = {\"value1\" : value1, \"value2\": value2 };\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 860,
-        "y": 600,
+        "x": 880,
+        "y": 692,
         "wires": [
             [
                 "c88e2d17.9212d"
+            ]
+        ]
+    },
+    {
+        "id": "e845d88f.ecba78",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60004",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 230,
+        "y": 720,
+        "wires": [
+            [
+                "60517a5.25d2604"
+            ]
+        ]
+    },
+    {
+        "id": "7ae6b9d3.be897",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60005",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 230,
+        "y": 780,
+        "wires": [
+            [
+                "60517a5.25d2604"
+            ]
+        ]
+    },
+    {
+        "id": "305abe66.965afa",
+        "type": "tcp in",
+        "z": "b5d1af96.0416f8",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "60006",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "",
+        "base64": false,
+        "x": 230,
+        "y": 840,
+        "wires": [
+            [
+                "60517a5.25d2604"
+            ]
+        ]
+    },
+    {
+        "id": "60517a5.25d2604",
+        "type": "switch",
+        "z": "b5d1af96.0416f8",
+        "name": "filterMalformed",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^([1-6],)*[1-6]$",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 480,
+        "y": 692,
+        "wires": [
+            [
+                "f1c576d3.34e12"
             ]
         ]
     }

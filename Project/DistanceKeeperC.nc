@@ -178,7 +178,7 @@ implementation
 				// Update current state
 				lastIncrementalIds[senderIndex] = msg->incrementalId;
 				probeCounters[senderIndex]++;
-				printf("From %d) continuos probes=%d\n", senderId, probeCounters[senderIndex]);
+				//printf("From %d) continuos probes=%d\n", senderId, probeCounters[senderIndex]);
 				
 				if (probeCounters[senderIndex] >= MIN_PROBE_COUNT_ALARM) // 10
 				{

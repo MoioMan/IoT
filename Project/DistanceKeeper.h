@@ -1,7 +1,7 @@
 #ifndef DISTANCEKEEPER_H
 #define DISTANCEKEEPER_H
 
-//#define SERIAL_DEBUG
+#define SERIAL_DEBUG
 
 #define MAX_MOTE_NUM 				6 			// Mote number in the environment
 #define PROBE_PERIOD_MS 			500			// Probe sending period
