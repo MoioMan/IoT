@@ -131,10 +131,10 @@ implementation
 		// Check if there is a mote from which I did not receive a new probe (= same counters)
 		for (i = 0; i < MAX_MOTE_NUM; i++)
 		{
-			if (lastProbeCounters[i] == probeCounters[i] && i + 1 != TOS_NODE_ID)
+			if (probeCounters[i] != 0 && lastProbeCounters[i] == probeCounters[i] && i + 1 != TOS_NODE_ID)
 			{
 				probeCounters[i] = 0; // No more near -> Reset
-				printf("Node %d is not near\n", i + 1);	
+				printf("Node %d is no more near\n", i + 1);	
 			}
 		
 			// Update last state
@@ -172,7 +172,7 @@ implementation
 				{
 					// Found a discontinuity
 					probeCounters[senderIndex] = 0;	
-					printf("I skipped a msg! Reset\n");		
+					printf("Node %d is approaching\n", senderId);		
 				}							
 				
 				// Update current state
